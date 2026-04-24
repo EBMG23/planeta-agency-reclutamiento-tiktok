@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Orbitron", serif;
+
+  --color-space-black: #121212;
+  --color-space-dark: #1a1a1c;
+  --color-tiktok-pink: #ff0050;
+  --color-tiktok-cyan: #00f2ea;
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  body {
+    @apply bg-space-black text-white font-sans selection:bg-tiktok-pink/30 antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    @apply font-display tracking-wider font-bold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/[0.1];
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .glass-hover {
+    @apply hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-500 cursor-default;
+  }
+
+  .text-glow-tiktok {
+    text-shadow: -2px 0 0 #ff0050, 2px 0 0 #00f2ea;
+  }
+
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+  }
+}
+
+/* Background effects */
+.nebula-container {
+  @apply fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-space-black;
+  background: radial-gradient(circle at 50% 50%, #1a1a1c 0%, #121212 100%);
+}
+
+.nebula-purple {
+  @apply absolute rounded-full;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(255,0,80,0.12) 0%, transparent 70%);
+  top: -15%;
+  right: -5%;
+  filter: blur(120px);
+  animation: pulse-slow 8s infinite alternate;
+}
+
+.nebula-blue {
+  @apply absolute rounded-full;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0,242,234,0.1) 0%, transparent 70%);
+  bottom: -10%;
+  left: -5%;
+  filter: blur(140px);
+  animation: pulse-slow 10s infinite alternate-reverse;
+}
+
+@keyframes pulse-slow {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+.star-grid {
+  @apply fixed inset-0 z-[-2] pointer-events-none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.border-gradient {
+  background: linear-gradient(var(--color-space-black), var(--color-space-black)) padding-box,
+              linear-gradient(to right, var(--color-tiktok-pink), var(--color-tiktok-cyan)) border-box;
+  border: 1px solid transparent;
+}
+
